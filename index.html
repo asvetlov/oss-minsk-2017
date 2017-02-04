@@ -171,6 +171,140 @@
           </section>
         </section>
         <section>
+          <section>
+            <h1>API</h1>
+          </section>
+          <section>
+            <h1>Targets</h1>
+            <ul>
+              <li>Evolvement</li>
+              <li>Stability</li>
+              <li>Backward compatibility</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Public Facade</h2>
+            <img src="facade-7.jpg" width="70%"/>
+          </section>
+          <section>
+            <h2>Minimalistic API</h2>
+            <p>Hide implementation details</p>
+          </section>
+          <section>
+            <pre><code>
+class A:
+    attr1 = 1
+    attr2 = "val"
+
+    def meth(self): ...
+
+    def other(self): ...
+            </code></pre>
+          </section>
+          <section>
+            <pre><code>
+class A:
+    _attr1 = 1
+    _attr2 = "val"
+
+    @property
+    def attr1(self):
+        return self._attr1
+    @attr1.setter
+    def attr1(self, val):
+        if not isinstance(val, int):
+            raise TypeError(...)
+        self._attr1 = val
+    def meth(self): ...
+    def _other(self): ...
+            </code></pre>
+          </section>
+          <section>
+            <h2>Public API ≡ Documented API</h2>
+            <p>Throubles with feature documenting — <b>bad</b> smell.</p>
+          </section>
+          <section>
+            <h2>Readability</h2>
+            <ul>
+              <p>Write once — read permanently</p>
+              <p>Be Pythonic</p>
+              <p class="fragment">Say <b>no</b> to magic overusage</p>
+            </ul>
+          </section>
+          <section>
+            <h2>Ducktyping is semi-evil</h2>
+            <img src="fake_duck.jpg" width="50%"/>
+          </section>
+          <section>
+            <h2>Final classes & interfaces</h2>
+            <h3>vs</h3>
+            <h2>Inheritance</h2>
+          </section>
+          <section>
+            <pre><code>
+class BaseHandler:
+    def on_data(self, data): pass
+
+    def write(self, buf): ...
+
+
+class Handler(BaseHandler):
+   def on_data(self, data):
+       self.write(data)
+        
+            </code></pre>
+          </section>
+          <section>
+            <pre><code>
+class BaseHandler:
+    def __init__(self):
+        self._value = 123
+
+class Handler(BaseHandler):
+   def __init__(self):
+       super().__init__()
+       self._value = "ABC"
+
+   def on_data(self, data): ...
+            </code></pre>
+          </section>
+          <section>
+            <pre><code>
+class HandlerABC(abc.ABC):
+    @abc.abstractmethod
+    def on_data(self, data): pass
+
+class Writer:
+    def write(self, data): ...
+
+class Handler(HandlerABC):
+   def __init__(self, writer):
+       self._writer = writer
+
+   def on_data(self, data):
+       self._writer.write(data)
+            </code></pre>
+          </section>
+          <section>
+            <h2>Deprecation</h2>
+            <pre><code>
+import warnings
+
+def func():
+    warnings.warn("Use func2() instead",
+                  DeprecationWarning,
+                  stacklevel=2)
+    func2()
+
+def func2(): ...
+            </code></pre>
+          </section>
+          <section>
+            <h2>Contributors are power</h2>
+            <img src="contributors.jpg" width="60%"/>
+          </section>
+        </section>
+        <section>
           <h1>Questions?</h1>
           <p>
             Andrew Svetlov
