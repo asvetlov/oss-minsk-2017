@@ -40,7 +40,7 @@
             <p>
               <small>http://asvetlov.blogspot.com</small><br>
               <small>andrew.svetlov@gmail.com</small><br>
-              <small>http://asvetlov.github.io/oss-minks-2017/</small>
+              <small>http://asvetlov.github.io/oss-minsk-2017/</small>
             </p>
           </p>
         </section>
@@ -75,10 +75,12 @@
         <section>
           <h2>Life cycle</h2>
           <ol>
-            <li class="fragment">Make github project</li>
-            <li class="fragment">Write code</li>
-            <li class="fragment">Publish on PyPI</li>
-            <li class="fragment"><b><i>Profit???</i></b></li>
+            <li>Make github project</li>
+            <li>Write code</li>
+            <li>Write...</li>
+            <li>Write...</li>
+            <li>Publish on PyPI</li>
+            <li><b><i>Profit???</i></b></li>
           </ol>
         </section>
         <section>
@@ -112,7 +114,7 @@
               <li>appveyor.com</li>
               <li>circleci.com</li>
             </ul>
-            <p class="fragment">Measure on <b><i>every Pull Request</i></b></p>
+            <p class="fragment">Run tests on <b><i>every Pull Request</i></b></p>
           </section>
           <section>
             <h2>Test coverage</h2>
@@ -128,6 +130,7 @@
           </section>
           <section>
             <h1>Love to read</h1>
+            <h3>&</h3>
             <h1 class="fragment">Hate to write</h1>
           </section>
           <section>
@@ -269,12 +272,16 @@ class BaseHandler:
     def __init__(self):
         self._value = 123
 
+    def write(self, data):
+       self._do_write(self._value, data)
+
 class Handler(BaseHandler):
    def __init__(self):
        super().__init__()
        self._value = "ABC"
 
-   def on_data(self, data): ...
+   def on_data(self, data):
+       print(self._value)
             </code></pre>
           </section>
           <section>
